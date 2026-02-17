@@ -1,0 +1,358 @@
+.workflow-selection-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Auth Banner */
+.auth-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.auth-banner.checking {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.auth-banner.authenticated {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.auth-banner.not_authenticated {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.auth-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.auth-status-dot.connected {
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+.auth-status-dot.disconnected {
+  background: #f59e0b;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+}
+
+.btn-login,
+.btn-logout {
+  margin-left: auto;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-login {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-login:hover {
+  opacity: 0.9;
+}
+
+.btn-logout {
+  background: transparent;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.btn-logout:hover {
+  background: #d1fae5;
+}
+
+/* Auth Form */
+.auth-form {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-form h3 {
+  margin: 0 0 0.75rem 0;
+  color: #1f2937;
+  font-size: 1.1rem;
+}
+
+.auth-instructions {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+}
+
+.auth-hint {
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+.auth-url-box {
+  background: #f9fafb;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.auth-url-box a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-url-box a:hover {
+  text-decoration: underline;
+}
+
+.auth-code-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.auth-code-input input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: monospace;
+}
+
+.auth-code-input input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+.auth-code-input button {
+  padding: 0.6rem 1.25rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.auth-code-input button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.auth-code-input button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-cancel-auth {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.825rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-cancel-auth:hover {
+  color: #374151;
+}
+
+.workflow-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.workflow-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+  font-size: 1.75rem;
+}
+
+.workflow-header .description {
+  color: #6b7280;
+  margin: 0;
+}
+
+.workflow-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.workflow-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.workflow-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.workflow-card.featured {
+  border-color: #3b82f6;
+}
+
+.workflow-badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.workflow-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.workflow-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+  font-size: 1.25rem;
+}
+
+.workflow-card > p {
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+  font-size: 0.925rem;
+  line-height: 1.5;
+}
+
+.workflow-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.workflow-features li {
+  padding: 0.375rem 0;
+  color: #4b5563;
+  font-size: 0.875rem;
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.workflow-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.btn-select {
+  width: 100%;
+  padding: 0.75rem;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-select:hover {
+  background: #e5e7eb;
+}
+
+.btn-select.btn-featured {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+}
+
+.btn-select.btn-featured:hover {
+  opacity: 0.9;
+}
+
+.workflow-info {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+}
+
+.workflow-info h4 {
+  margin: 0 0 0.75rem 0;
+  color: #374151;
+  font-size: 1rem;
+}
+
+.workflow-info p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .workflow-selection-page {
+    padding: 1rem;
+  }
+
+  .workflow-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-card {
+    padding: 1.5rem;
+  }
+
+  .workflow-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .workflow-info {
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .workflow-selection-page {
+    max-width: 1100px;
+  }
+}

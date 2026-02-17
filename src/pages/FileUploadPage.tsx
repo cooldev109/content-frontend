@@ -76,7 +76,7 @@ function FileUploadPage() {
     setIsParsing(true);
 
     try {
-      const response = await fetch('http://localhost:3456/api/modules/parse', {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:3456/api/modules/parse`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

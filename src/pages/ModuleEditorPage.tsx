@@ -133,7 +133,7 @@ function ModuleEditorPage() {
     setIsGenerating(true);
 
     try {
-      const response = await fetch('http://localhost:3456/api/modules/generate-content', {
+      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:3456/api/modules/generate-content`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ courseStructure }),

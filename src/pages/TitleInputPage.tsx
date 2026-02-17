@@ -20,7 +20,7 @@ function TitleInputPage() {
     setIsGenerating(true);
 
     try {
-      const response = await fetch(`${window.location.protocol}//${window.location.hostname}:3456/api/modules/generate`, {
+      const response = await fetch('/api/modules/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ courseTitle: courseTitle.trim() }),

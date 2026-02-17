@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WorkflowSelectionPage.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3456';
+const API_URL = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:3456`;
 
 function WorkflowSelectionPage() {
   const navigate = useNavigate();

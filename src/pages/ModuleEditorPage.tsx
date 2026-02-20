@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 import './ModuleEditorPage.css';
 
 interface Module {
@@ -24,6 +25,7 @@ interface CourseStructure {
 function ModuleEditorPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLanguage();
   const [courseStructure, setCourseStructure] = useState<CourseStructure | null>(null);
   const [editingModule, setEditingModule] = useState<number | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -56,11 +58,11 @@ function ModuleEditorPage() {
 
     const newModule: Module = {
       number: courseStructure.modules.length + 1,
-      title: 'New Module',
-      description: 'Module description',
-      objectives: ['Learning objective'],
-      topics: ['Topic 1'],
-      estimatedDuration: '1-2 hours',
+      title: t('moduleEditor.newModule'),
+      description: t('moduleEditor.moduleDescription'),
+      objectives: [t('moduleEditor.learningObjective')],
+      topics: [t('moduleEditor.topic1')],
+      estimatedDuration: t('moduleEditor.defaultDuration'),
     };
 
     setCourseStructure({
@@ -158,7 +160,7 @@ function ModuleEditorPage() {
       <div className="module-editor-page">
         <div className="loading-container">
           <div className="spinner"></div>
-          <p>Loading...</p>
+          <p>{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -175,7 +177,11 @@ function ModuleEditorPage() {
   return (
     <div className="module-editor-page">
       <button className="btn-back" onClick={handleBack}>
-        ← Back to {sourceFlow === 'file-upload' ? 'file upload' : 'title input'}
+        &larr; {t('moduleEditor.backTo', {
+          destination: t(sourceFlow === 'file-upload'
+            ? 'moduleEditor.backToFileUpload'
+            : 'moduleEditor.backToTitleInput')
+        })}
       </button>
 
       <div className="editor-header">
@@ -183,18 +189,18 @@ function ModuleEditorPage() {
           <h2>{courseStructure.courseTitle}</h2>
           <p>{courseStructure.courseDescription}</p>
           <div className="course-meta">
-            <span>Target: {courseStructure.targetAudience}</span>
-            <span>Duration: {courseStructure.estimatedDuration}</span>
-            <span>{courseStructure.modules.length} modules</span>
+            <span>{t('moduleEditor.target', { audience: courseStructure.targetAudience })}</span>
+            <span>{t('moduleEditor.duration', { duration: courseStructure.estimatedDuration })}</span>
+            <span>{t('moduleEditor.modulesCount', { count: courseStructure.modules.length })}</span>
           </div>
         </div>
 
         <div className="editor-actions">
           <button className="btn-export" onClick={exportToTxt}>
-            Export TXT
+            {t('moduleEditor.exportTxt')}
           </button>
           <button className="btn-add" onClick={addModule}>
-            + Add Module
+            {t('moduleEditor.addModule')}
           </button>
         </div>
       </div>
@@ -208,28 +214,28 @@ function ModuleEditorPage() {
             className={`module-card ${editingModule === index ? 'editing' : ''}`}
           >
             <div className="module-header">
-              <div className="module-number">Module {module.number}</div>
+              <div className="module-number">{t('moduleEditor.moduleNumber', { number: module.number })}</div>
               <div className="module-actions">
                 <button
                   className="btn-icon"
                   onClick={() => moveModule(index, 'up')}
                   disabled={index === 0}
-                  title="Move up"
+                  title={t('moduleEditor.moveUp')}
                 >
-                  ↑
+                  &uarr;
                 </button>
                 <button
                   className="btn-icon"
                   onClick={() => moveModule(index, 'down')}
                   disabled={index === courseStructure.modules.length - 1}
-                  title="Move down"
+                  title={t('moduleEditor.moveDown')}
                 >
-                  ↓
+                  &darr;
                 </button>
                 <button
                   className="btn-icon btn-edit"
                   onClick={() => setEditingModule(editingModule === index ? null : index)}
-                  title={editingModule === index ? 'Close' : 'Edit'}
+                  title={editingModule === index ? t('moduleEditor.close') : t('moduleEditor.edit')}
                 >
                   {editingModule === index ? '✓' : '✎'}
                 </button>
@@ -237,9 +243,9 @@ function ModuleEditorPage() {
                   className="btn-icon btn-delete"
                   onClick={() => deleteModule(index)}
                   disabled={courseStructure.modules.length <= 1}
-                  title="Delete"
+                  title={t('moduleEditor.delete')}
                 >
-                  ×
+                  &times;
                 </button>
               </div>
             </div>
@@ -247,7 +253,7 @@ function ModuleEditorPage() {
             {editingModule === index ? (
               <div className="module-edit-form">
                 <div className="form-group">
-                  <label>Title</label>
+                  <label>{t('moduleEditor.titleLabel')}</label>
                   <input
                     type="text"
                     value={module.title}
@@ -255,7 +261,7 @@ function ModuleEditorPage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Description</label>
+                  <label>{t('moduleEditor.descriptionLabel')}</label>
                   <textarea
                     value={module.description}
                     onChange={(e) => updateModule(index, 'description', e.target.value)}
@@ -263,7 +269,7 @@ function ModuleEditorPage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Topics (comma separated)</label>
+                  <label>{t('moduleEditor.topicsLabel')}</label>
                   <input
                     type="text"
                     value={module.topics.join(', ')}
@@ -271,13 +277,13 @@ function ModuleEditorPage() {
                       updateModule(
                         index,
                         'topics',
-                        e.target.value.split(',').map((t) => t.trim()).filter((t) => t)
+                        e.target.value.split(',').map((s) => s.trim()).filter((s) => s)
                       )
                     }
                   />
                 </div>
                 <div className="form-group">
-                  <label>Objectives (comma separated)</label>
+                  <label>{t('moduleEditor.objectivesLabel')}</label>
                   <input
                     type="text"
                     value={module.objectives.join(', ')}
@@ -291,7 +297,7 @@ function ModuleEditorPage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Estimated Duration</label>
+                  <label>{t('moduleEditor.estimatedDuration')}</label>
                   <input
                     type="text"
                     value={module.estimatedDuration}
@@ -305,7 +311,7 @@ function ModuleEditorPage() {
                 <p className="module-description">{module.description}</p>
                 {module.topics.length > 0 && (
                   <div className="module-topics">
-                    <strong>Topics:</strong> {module.topics.join(' • ')}
+                    <strong>{t('moduleEditor.topics')}</strong> {module.topics.join(' • ')}
                   </div>
                 )}
                 <div className="module-duration">{module.estimatedDuration}</div>
@@ -324,14 +330,14 @@ function ModuleEditorPage() {
           {isGenerating ? (
             <>
               <span className="spinner-inline"></span>
-              Starting generation...
+              {t('moduleEditor.startingGeneration')}
             </>
           ) : (
-            'Generate Course Content'
+            t('moduleEditor.generateCourseContent')
           )}
         </button>
         <p className="generate-info">
-          This will generate complete content for all {courseStructure.modules.length} modules and save to Google Drive
+          {t('moduleEditor.generateInfo', { count: courseStructure.modules.length })}
         </p>
       </div>
     </div>

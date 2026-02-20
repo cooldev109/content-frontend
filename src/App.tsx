@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useLanguage } from './i18n/LanguageContext';
+import LoginPage from './pages/LoginPage';
 import WorkflowSelectionPage from './pages/WorkflowSelectionPage';
 import HomePage from './pages/HomePage';
 import TitleInputPage from './pages/TitleInputPage';
@@ -8,12 +11,41 @@ import GenerationPage from './pages/GenerationPage';
 import './App.css';
 
 function App() {
+  const { language, setLanguage, t } = useLanguage();
+  const [user, setUser] = useState<string | null>(() => localStorage.getItem('user'));
+
+  const handleLogin = (username: string) => {
+    setUser(username);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
+
+  if (!user) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   return (
     <BrowserRouter>
       <div className="app">
         <header className="app-header">
-          <h1>Course Content Generator</h1>
-          <p>AI-powered course content generation with Google Drive integration</p>
+          <div className="header-top">
+            <h1>{t('app.title')}</h1>
+            <div className="header-actions">
+              <button
+                className="language-toggle"
+                onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+              >
+                {language === 'en' ? 'ES' : 'EN'}
+              </button>
+              <button className="btn-user-logout" onClick={handleLogout}>
+                {user} &middot; {t('login.logout')}
+              </button>
+            </div>
+          </div>
+          <p>{t('app.subtitle')}</p>
         </header>
 
         <main className="app-main">
@@ -28,7 +60,7 @@ function App() {
         </main>
 
         <footer className="app-footer">
-          <p>Course Content Generator v1.0.0</p>
+          <p>{t('app.version')}</p>
         </footer>
       </div>
     </BrowserRouter>

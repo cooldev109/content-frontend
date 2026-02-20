@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { startGeneration, validateConfig } from '../api/client';
+import { useLanguage } from '../i18n/LanguageContext';
 import './HomePage.css';
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [fileId, setFileId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,17 +17,17 @@ export default function HomePage() {
       const result = await validateConfig();
       setConfigStatus(result.valid ? 'valid' : 'invalid');
       if (!result.valid) {
-        setError('Backend configuration is invalid. Please check your .env file.');
+        setError(t('home.configInvalid'));
       }
     } catch (err) {
       setConfigStatus('invalid');
-      setError('Failed to connect to backend server. Is it running on port 3456?');
+      setError(t('home.connectFailed'));
     }
   };
 
   const handleGenerate = async () => {
     if (!fileId.trim()) {
-      setError('Please enter a Google Drive File ID');
+      setError(t('home.pleaseEnterFileId'));
       return;
     }
 
@@ -52,41 +54,41 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <button className="btn-back" onClick={() => navigate('/')}>
-        ← Back to workflows
+        &larr; {t('common.backToWorkflows')}
       </button>
 
       <div className="config-check">
         {configStatus === 'unchecked' && (
           <button onClick={checkConfig} className="btn-check">
-            Check Backend Connection
+            {t('home.checkBackend')}
           </button>
         )}
         {configStatus === 'valid' && (
-          <span className="status-ok">✓ Backend Connected</span>
+          <span className="status-ok">&#10003; {t('home.backendConnected')}</span>
         )}
         {configStatus === 'invalid' && (
-          <span className="status-error">✗ Backend Error</span>
+          <span className="status-error">&#10007; {t('home.backendError')}</span>
         )}
       </div>
 
       <div className="input-card">
-        <h2>Enter Google Drive File ID</h2>
+        <h2>{t('home.enterFileId')}</h2>
         <p className="description">
-          Enter the File ID of your course index document (Word doc or Google Doc)
+          {t('home.enterFileIdDesc')}
         </p>
 
         <div className="form-group">
-          <label htmlFor="fileId">File ID</label>
+          <label htmlFor="fileId">{t('home.fileIdLabel')}</label>
           <input
             type="text"
             id="fileId"
             value={fileId}
             onChange={(e) => setFileId(e.target.value)}
-            placeholder="e.g., 1FhKtocKQ2TUd-nhO6IYWJwrRIsqjVBVj"
+            placeholder={t('home.fileIdPlaceholder')}
             disabled={loading}
           />
           <small>
-            Find the ID in the URL: drive.google.com/file/d/<strong>[FILE_ID]</strong>/view
+            {t('home.fileIdHint')}<strong>{t('home.fileIdHintBold')}</strong>{t('home.fileIdHintSuffix')}
           </small>
         </div>
 
@@ -97,17 +99,17 @@ export default function HomePage() {
           onClick={handleGenerate}
           disabled={loading || !fileId.trim()}
         >
-          {loading ? 'Starting...' : 'Generate Course Content'}
+          {loading ? t('home.starting') : t('home.generateContent')}
         </button>
       </div>
 
       <div className="info-section">
-        <h3>How it works</h3>
+        <h3>{t('home.howItWorks')}</h3>
         <ol>
-          <li>Enter the Google Drive File ID of your course index</li>
-          <li>The system reads and parses the document</li>
-          <li>Content is generated for each topic using AI</li>
-          <li>Results are saved to Google Drive</li>
+          <li>{t('home.step1')}</li>
+          <li>{t('home.step2')}</li>
+          <li>{t('home.step3')}</li>
+          <li>{t('home.step4')}</li>
         </ol>
       </div>
     </div>

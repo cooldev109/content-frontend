@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 import './FileUploadPage.css';
 
 function FileUploadPage() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [courseTitle, setCourseTitle] = useState('');
   const [fileContent, setFileContent] = useState('');
@@ -14,7 +16,7 @@ function FileUploadPage() {
 
   const handleFile = (file: File) => {
     if (!file.name.endsWith('.txt')) {
-      setError('Please upload a .txt file');
+      setError(t('fileUpload.pleaseUploadTxt'));
       return;
     }
 
@@ -33,7 +35,7 @@ function FileUploadPage() {
       }
     };
     reader.onerror = () => {
-      setError('Failed to read file');
+      setError(t('fileUpload.failedReadFile'));
     };
     reader.readAsText(file);
   };
@@ -68,7 +70,7 @@ function FileUploadPage() {
     e.preventDefault();
 
     if (!fileContent) {
-      setError('Please upload a file first');
+      setError(t('fileUpload.pleaseUploadFile'));
       return;
     }
 
@@ -88,13 +90,13 @@ function FileUploadPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to parse modules');
+        throw new Error(data.error || t('fileUpload.failedParseModules'));
       }
 
       // Navigate to module editor with parsed structure and source info
       navigate('/module-editor', { state: { courseStructure: data.courseStructure, from: 'file-upload' } });
     } catch (err: any) {
-      setError(err.message || 'Failed to parse modules');
+      setError(err.message || t('fileUpload.failedParseModules'));
     } finally {
       setIsParsing(false);
     }
@@ -112,14 +114,14 @@ function FileUploadPage() {
   return (
     <div className="file-upload-page">
       <button className="btn-back" onClick={() => navigate('/')}>
-        ← Back to workflows
+        &larr; {t('common.backToWorkflows')}
       </button>
 
       <div className="upload-card">
         <div className="card-icon">📁</div>
-        <h2>Import Module Structure</h2>
+        <h2>{t('fileUpload.importModuleStructure')}</h2>
         <p className="description">
-          Upload a TXT file containing your course module structure
+          {t('fileUpload.importDesc')}
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -144,30 +146,30 @@ function FileUploadPage() {
                 <div className="file-icon">📄</div>
                 <div className="file-details">
                   <span className="file-name">{fileName}</span>
-                  <span className="file-size">{fileContent.length} characters</span>
+                  <span className="file-size">{t('fileUpload.characters', { count: fileContent.length })}</span>
                 </div>
                 <button type="button" className="btn-clear" onClick={clearFile}>
-                  ×
+                  &times;
                 </button>
               </div>
             ) : (
               <div className="drop-content">
                 <div className="drop-icon">📤</div>
-                <p>Drag & drop your TXT file here</p>
-                <span>or click to browse</span>
+                <p>{t('fileUpload.dragAndDrop')}</p>
+                <span>{t('fileUpload.orClickBrowse')}</span>
               </div>
             )}
           </div>
 
           {fileName && (
             <div className="form-group">
-              <label htmlFor="courseTitle">Course Title (optional)</label>
+              <label htmlFor="courseTitle">{t('fileUpload.courseTitleOptional')}</label>
               <input
                 type="text"
                 id="courseTitle"
                 value={courseTitle}
                 onChange={(e) => setCourseTitle(e.target.value)}
-                placeholder="Enter course title or leave empty to auto-detect"
+                placeholder={t('fileUpload.courseTitlePlaceholder')}
               />
             </div>
           )}
@@ -182,17 +184,17 @@ function FileUploadPage() {
             {isParsing ? (
               <>
                 <span className="spinner-inline"></span>
-                Parsing modules...
+                {t('fileUpload.parsingModules')}
               </>
             ) : (
-              'Parse & Continue'
+              t('fileUpload.parseContinue')
             )}
           </button>
         </form>
       </div>
 
       <div className="format-info">
-        <h3>Expected File Format</h3>
+        <h3>{t('fileUpload.expectedFormat')}</h3>
         <div className="format-example">
           <pre>{`Course: Introduction to Finance
 
@@ -210,8 +212,7 @@ Description: Introduction to various investment vehicles and strategies.
 Topics: Stocks, Bonds, Mutual funds, Risk assessment`}</pre>
         </div>
         <p className="format-note">
-          Each module should start with "Module N:" followed by the title.
-          Description, Topics, Objectives, and Duration fields are optional.
+          {t('fileUpload.formatNote')}
         </p>
       </div>
     </div>

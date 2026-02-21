@@ -50,6 +50,26 @@ export interface DriveFile {
   mimeType: string;
 }
 
+// Custom prompts
+export interface CustomPrompts {
+  moduleGeneration?: string;
+  topicIndex?: string;
+  topicDevelopment?: string;
+}
+
+const STORAGE_PREFIX = 'customPrompt_';
+
+export function getCustomPrompts(): CustomPrompts | undefined {
+  const prompts: CustomPrompts = {};
+  const mg = localStorage.getItem(`${STORAGE_PREFIX}moduleGeneration`);
+  const ti = localStorage.getItem(`${STORAGE_PREFIX}topicIndex`);
+  const td = localStorage.getItem(`${STORAGE_PREFIX}topicDevelopment`);
+  if (mg) prompts.moduleGeneration = mg;
+  if (ti) prompts.topicIndex = ti;
+  if (td) prompts.topicDevelopment = td;
+  return Object.keys(prompts).length > 0 ? prompts : undefined;
+}
+
 // API functions
 export async function checkHealth() {
   const response = await api.get('/api/health');
@@ -85,6 +105,7 @@ export async function startGeneration(params: {
   indexFileId?: string;
   rootFolderId?: string;
   courseSpec?: CourseSpec;
+  customPrompts?: CustomPrompts;
 }): Promise<{ success: boolean; jobId: string }> {
   const response = await api.post('/api/generate', params);
   return response.data;

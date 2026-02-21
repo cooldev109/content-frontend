@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { startGeneration, validateConfig } from '../api/client';
+import { startGeneration, validateConfig, getCustomPrompts } from '../api/client';
 import { useLanguage } from '../i18n/LanguageContext';
 import './HomePage.css';
 
@@ -37,6 +37,7 @@ export default function HomePage() {
     try {
       const result = await startGeneration({
         indexFileId: fileId.trim(),
+        customPrompts: getCustomPrompts(),
       });
 
       if (result.success && result.jobId) {

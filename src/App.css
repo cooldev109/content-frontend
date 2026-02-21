@@ -70,6 +70,24 @@ body {
   background: rgba(255, 255, 255, 0.3);
 }
 
+.btn-prompts {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-prompts:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
 .btn-user-logout {
   background: rgba(255, 255, 255, 0.15);
   color: white;

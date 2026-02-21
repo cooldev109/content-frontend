@@ -166,5 +166,27 @@
     "generationFailed": "Generaci\u00f3n Fallida",
     "tryAgain": "Intentar de Nuevo",
     "jobId": "ID del Trabajo: {{id}}"
+  },
+  "promptEditor": {
+    "headerButton": "Prompts",
+    "backToWorkflows": "Volver a flujos de trabajo",
+    "pageTitle": "Editor de Prompts",
+    "pageDescription": "Personaliza los prompts de IA utilizados para la generaci\u00f3n de contenido. Haz clic en Guardar para conservar tus cambios.",
+    "moduleGeneration": "Prompt de Generaci\u00f3n de M\u00f3dulos",
+    "moduleGenerationDesc": "Se usa al generar la estructura de m\u00f3dulos del curso a partir de un t\u00edtulo",
+    "topicIndex": "Prompt de \u00cdndice de Tema",
+    "topicIndexDesc": "Se usa para generar el esquema estructurado de cada tema",
+    "topicDevelopment": "Prompt de Desarrollo de Tema",
+    "topicDevelopmentDesc": "Se usa para generar el contenido completo de cada tema",
+    "setDefault": "Restaurar por Defecto",
+    "badgeDefault": "Por Defecto",
+    "badgeCustom": "Personalizado",
+    "variablesHint": "Variables disponibles: {{variables}}",
+    "loadingDefaults": "Cargando prompts por defecto...",
+    "loadError": "Error al cargar los prompts por defecto",
+    "saveButton": "Guardar",
+    "saving": "Guardando...",
+    "savedSuccess": "\u00a1Guardado!",
+    "savedError": "Error al guardar"
   }
 }

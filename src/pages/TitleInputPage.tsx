@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
+import { getCustomPrompts } from '../api/client';
 import './TitleInputPage.css';
 
 function TitleInputPage() {
@@ -25,7 +26,7 @@ function TitleInputPage() {
       const response = await fetch('/api/modules/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ courseTitle: courseTitle.trim() }),
+        body: JSON.stringify({ courseTitle: courseTitle.trim(), customPrompts: getCustomPrompts() }),
       });
 
       const data = await response.json();

@@ -166,5 +166,27 @@
     "generationFailed": "Generation Failed",
     "tryAgain": "Try Again",
     "jobId": "Job ID: {{id}}"
+  },
+  "promptEditor": {
+    "headerButton": "Prompts",
+    "backToWorkflows": "Back to workflows",
+    "pageTitle": "Prompt Editor",
+    "pageDescription": "Customize the AI prompts used for content generation. Click Save to persist your changes.",
+    "moduleGeneration": "Module Generation Prompt",
+    "moduleGenerationDesc": "Used when generating course module structure from a title",
+    "topicIndex": "Topic Index Prompt",
+    "topicIndexDesc": "Used to generate the structured outline for each topic",
+    "topicDevelopment": "Topic Development Prompt",
+    "topicDevelopmentDesc": "Used to generate the full content for each topic",
+    "setDefault": "Reset to Default",
+    "badgeDefault": "Default",
+    "badgeCustom": "Custom",
+    "variablesHint": "Available variables: {{variables}}",
+    "loadingDefaults": "Loading default prompts...",
+    "loadError": "Failed to load default prompts",
+    "saveButton": "Save",
+    "saving": "Saving...",
+    "savedSuccess": "Saved!",
+    "savedError": "Failed to save"
   }
 }

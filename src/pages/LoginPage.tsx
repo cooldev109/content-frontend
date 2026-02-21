@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { login, setToken } from '../api/client';
 import './LoginPage.css';
 
 interface LoginPageProps {
@@ -25,22 +26,12 @@ function LoginPage({ onLogin }: LoginPageProps) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username.trim(), password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || t('login.invalidCredentials'));
-      }
-
+      const data = await login(username.trim(), password);
+      setToken(data.token);
       localStorage.setItem('user', data.username);
       onLogin(data.username);
     } catch (err: any) {
-      setError(err.message || t('login.invalidCredentials'));
+      setError(err.response?.data?.error || err.message || t('login.invalidCredentials'));
     } finally {
       setIsLoading(false);
     }

@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
+import { authFetch } from '../api/client';
 import './FileUploadPage.css';
 
 function FileUploadPage() {
@@ -78,7 +79,7 @@ function FileUploadPage() {
     setIsParsing(true);
 
     try {
-      const response = await fetch('/api/modules/parse', {
+      const response = await authFetch('/api/modules/parse', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

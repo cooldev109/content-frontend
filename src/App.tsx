@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useLanguage } from './i18n/LanguageContext';
+import { syncSavedPrompts, removeToken } from './api/client';
 import LoginPage from './pages/LoginPage';
 import WorkflowSelectionPage from './pages/WorkflowSelectionPage';
 import HomePage from './pages/HomePage';
@@ -15,11 +16,18 @@ function App() {
   const { language, setLanguage, t } = useLanguage();
   const [user, setUser] = useState<string | null>(() => localStorage.getItem('user'));
 
+  useEffect(() => {
+    if (user) {
+      syncSavedPrompts();
+    }
+  }, [user]);
+
   const handleLogin = (username: string) => {
     setUser(username);
   };
 
   const handleLogout = () => {
+    removeToken();
     localStorage.removeItem('user');
     setUser(null);
   };

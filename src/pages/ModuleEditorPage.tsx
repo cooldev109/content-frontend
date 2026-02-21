@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { getCustomPrompts } from '../api/client';
+import { getCustomPrompts, authFetch } from '../api/client';
 import './ModuleEditorPage.css';
 
 interface Module {
@@ -136,7 +136,7 @@ function ModuleEditorPage() {
     setIsGenerating(true);
 
     try {
-      const response = await fetch('/api/modules/generate-content', {
+      const response = await authFetch('/api/modules/generate-content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ courseStructure, customPrompts: getCustomPrompts() }),

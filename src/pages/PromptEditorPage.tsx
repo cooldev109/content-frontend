@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
+import { authFetch } from '../api/client';
 import './PromptEditorPage.css';
 
 const PROMPT_KEYS = ['moduleGeneration', 'topicIndex', 'topicDevelopment'] as const;
@@ -31,8 +32,8 @@ function PromptEditorPage() {
   useEffect(() => {
     // Load defaults and saved custom prompts in parallel
     Promise.all([
-      fetch('/api/prompts/defaults').then((res) => res.json()),
-      fetch('/api/prompts/saved').then((res) => res.json()),
+      authFetch('/api/prompts/defaults').then((res) => res.json()),
+      authFetch('/api/prompts/saved').then((res) => res.json()),
     ])
       .then(([defaultsData, savedData]) => {
         if (defaultsData.success) {
@@ -85,7 +86,7 @@ function PromptEditorPage() {
         }
       }
 
-      const response = await fetch('/api/prompts/save', {
+      const response = await authFetch('/api/prompts/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompts: promptsToSave }),

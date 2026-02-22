@@ -1,7 +1,18 @@
 {
+  "auth": {
+    "brandTagline": "Generaci\u00f3n de contenido de cursos con IA e integraci\u00f3n con Google Drive",
+    "feature1": "Genera m\u00f3dulos de curso completos con IA",
+    "feature2": "Integraci\u00f3n con Google Drive y Docs",
+    "feature3": "Exporta y gestiona contenido f\u00e1cilmente",
+    "strength": {
+      "weak": "Contrase\u00f1a d\u00e9bil",
+      "medium": "Contrase\u00f1a aceptable",
+      "strong": "Contrase\u00f1a fuerte"
+    }
+  },
   "login": {
-    "title": "Iniciar Sesi\u00f3n",
-    "subtitle": "Ingresa tus credenciales para acceder a la plataforma",
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Inicia sesi\u00f3n en tu cuenta para continuar",
     "usernameLabel": "Usuario",
     "usernamePlaceholder": "Ingresa tu usuario",
     "passwordLabel": "Contrase\u00f1a",
@@ -15,8 +26,8 @@
     "goToSignup": "Registrarse"
   },
   "signup": {
-    "title": "Crear Cuenta",
-    "subtitle": "Reg\u00edstrate para acceder a la plataforma",
+    "title": "Crea tu cuenta",
+    "subtitle": "Comienza a generar contenido de cursos con IA",
     "confirmPasswordLabel": "Confirmar Contrase\u00f1a",
     "confirmPasswordPlaceholder": "Confirma tu contrase\u00f1a",
     "signupButton": "Crear Cuenta",

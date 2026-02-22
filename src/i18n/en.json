@@ -1,7 +1,18 @@
 {
+  "auth": {
+    "brandTagline": "AI-powered course content generation with seamless Google Drive integration",
+    "feature1": "Generate complete course modules with AI",
+    "feature2": "Seamless Google Drive & Docs integration",
+    "feature3": "Export and manage content effortlessly",
+    "strength": {
+      "weak": "Weak password",
+      "medium": "Fair password",
+      "strong": "Strong password"
+    }
+  },
   "login": {
-    "title": "Sign In",
-    "subtitle": "Enter your credentials to access the platform",
+    "title": "Welcome back",
+    "subtitle": "Sign in to your account to continue",
     "usernameLabel": "Username",
     "usernamePlaceholder": "Enter your username",
     "passwordLabel": "Password",
@@ -15,8 +26,8 @@
     "goToSignup": "Sign Up"
   },
   "signup": {
-    "title": "Create Account",
-    "subtitle": "Register to access the platform",
+    "title": "Create your account",
+    "subtitle": "Get started with AI-powered course generation",
     "confirmPasswordLabel": "Confirm Password",
     "confirmPasswordPlaceholder": "Confirm your password",
     "signupButton": "Create Account",

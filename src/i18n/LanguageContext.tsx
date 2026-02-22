@@ -23,7 +23,7 @@ function getNestedValue(obj: Record<string, any>, path: string): string {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const stored = localStorage.getItem('language');
-    return (stored === 'en' || stored === 'es') ? stored : 'en';
+    return (stored === 'en' || stored === 'es') ? stored : 'es';
   });
 
   const setLanguage = useCallback((lang: Language) => {

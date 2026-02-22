@@ -10,7 +10,24 @@
     "loggingIn": "Signing in...",
     "fillAllFields": "Please fill in all fields",
     "invalidCredentials": "Invalid username or password",
-    "logout": "Logout"
+    "logout": "Logout",
+    "noAccount": "Don't have an account?",
+    "goToSignup": "Sign Up"
+  },
+  "signup": {
+    "title": "Create Account",
+    "subtitle": "Register to access the platform",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "signupButton": "Create Account",
+    "signingUp": "Creating account...",
+    "fillAllFields": "Please fill in all fields",
+    "usernameTooShort": "Username must be at least 3 characters",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "passwordsMismatch": "Passwords do not match",
+    "registrationFailed": "Registration failed",
+    "alreadyHaveAccount": "Already have an account?",
+    "goToLogin": "Sign In"
   },
   "common": {
     "backToWorkflows": "Back to workflows",

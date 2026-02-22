@@ -80,6 +80,15 @@ export async function login(
   return response.data;
 }
 
+// Register function
+export async function register(
+  username: string,
+  password: string
+): Promise<{ success: boolean; username: string; token: string }> {
+  const response = await api.post('/api/register', { username, password });
+  return response.data;
+}
+
 // Types
 export interface CourseSpec {
   courseName: string;

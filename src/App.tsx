@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useLanguage } from './i18n/LanguageContext';
 import { syncSavedPrompts, removeToken } from './api/client';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import WorkflowSelectionPage from './pages/WorkflowSelectionPage';
 import HomePage from './pages/HomePage';
 import TitleInputPage from './pages/TitleInputPage';
@@ -15,6 +16,7 @@ import './App.css';
 function App() {
   const { language, setLanguage, t } = useLanguage();
   const [user, setUser] = useState<string | null>(() => localStorage.getItem('user'));
+  const [authPage, setAuthPage] = useState<'login' | 'signup'>('login');
 
   useEffect(() => {
     if (user) {
@@ -33,7 +35,20 @@ function App() {
   };
 
   if (!user) {
-    return <LoginPage onLogin={handleLogin} />;
+    if (authPage === 'signup') {
+      return (
+        <SignupPage
+          onSignup={handleLogin}
+          onSwitchToLogin={() => setAuthPage('login')}
+        />
+      );
+    }
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        onSwitchToSignup={() => setAuthPage('signup')}
+      />
+    );
   }
 
   return (

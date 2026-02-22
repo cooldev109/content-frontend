@@ -10,7 +10,24 @@
     "loggingIn": "Iniciando sesi\u00f3n...",
     "fillAllFields": "Por favor completa todos los campos",
     "invalidCredentials": "Usuario o contrase\u00f1a inv\u00e1lidos",
-    "logout": "Cerrar Sesi\u00f3n"
+    "logout": "Cerrar Sesi\u00f3n",
+    "noAccount": "\u00bfNo tienes una cuenta?",
+    "goToSignup": "Registrarse"
+  },
+  "signup": {
+    "title": "Crear Cuenta",
+    "subtitle": "Reg\u00edstrate para acceder a la plataforma",
+    "confirmPasswordLabel": "Confirmar Contrase\u00f1a",
+    "confirmPasswordPlaceholder": "Confirma tu contrase\u00f1a",
+    "signupButton": "Crear Cuenta",
+    "signingUp": "Creando cuenta...",
+    "fillAllFields": "Por favor completa todos los campos",
+    "usernameTooShort": "El usuario debe tener al menos 3 caracteres",
+    "passwordTooShort": "La contrase\u00f1a debe tener al menos 6 caracteres",
+    "passwordsMismatch": "Las contrase\u00f1as no coinciden",
+    "registrationFailed": "Error al registrarse",
+    "alreadyHaveAccount": "\u00bfYa tienes una cuenta?",
+    "goToLogin": "Iniciar Sesi\u00f3n"
   },
   "common": {
     "backToWorkflows": "Volver a flujos de trabajo",
